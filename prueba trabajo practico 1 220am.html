@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/table.css">
+    <link rel="stylesheet" href="styles/form.css">
+
+
+</head>
+
+<body>
+
+    <div class="content">
+
+        <header>
+            <img src="img/logoCervantes.png" alt="Institucion Cervantes">
+
+        </header>
+
+        <Aside>
+
+
+            <p>
+                Trabajo practico integrador de Programación I <br>Farias Luis
+            </p>
+
+            <h5>Prof. Barrionuevo Mario Cesar</h5>
+
+        </Aside>
+
+        <Main>
+            <section>
+                <h4>LISTADO</h4>
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>matricula</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>materia</th>
+                            <th>cicloLectivo</th>
+                            <th>notaParcial1</th>
+                            <th>notaParcial2</th>
+                            <th>Promedio General</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!--
+                        <tr>
+                            <td>pepe</td>
+                            <td>perez</td>
+                            <td>24</td>
+                            <td>1000</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>pepe</td>
+                            <td>perez</td>
+                            <td>24</td>
+                            <td>1000</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>pepe</td>
+                            <td>perez</td>
+                            <td>24</td>
+                            <td>1000</td>
+                        </tr>
+
+
+                        -->
+
+                    </tbody>
+
+                </table>
+
+
+
+
+            </section>
+
+            <section>
+                <h4>Estadisticas</h4>
+
+                <p id="estadisticas"></p>
+
+            </section>
+
+
+
+
+        </Main>
+
+        <footer>
+            <h5>Institucion Cervantes - Analista de Sistema</h5>
+        </footer>
+
+
+
+    </div>
+
+
+
+
+    <script>
+
+        matricula = []
+        nombre = []
+        apellido = []
+        materia = []
+        cicloLectivo = []
+        notaParcial1 = []
+        notaParcial2 = []
+        promedioGeneral = []
+
+        Cargar()
+        Listar()
+
+        function Cargar() {
+
+            for (i = 0; i < 3; i++) {
+
+                m = prompt("matricula");
+                n = prompt("Nombre:");
+                a = prompt("Apellido:");
+                e = prompt("materia");
+                c = prompt("ciclo lectivo");
+                np1 = parseFloat(prompt("nota parcial 1"));
+                np2 = parseFloat(prompt("nota parcial 2"));
+                promGen =(np1 + np2)/2;
+
+
+
+                matricula[i] = m
+                nombre[i] = n
+                apellido[i] = a
+                materia[i] = e
+                cicloLectivo[i] = parseInt(c)
+                notaParcial1[i] = parseInt(np1)
+                notaParcial2[i] = parseInt(np2)
+                promedioGeneral[i] = parseFloat(promGen) 
+
+
+            }
+
+            console.log(nombre, apellido,matricula,materia,cicloLectivo,notaParcial1,notaParcial2,promedioGeneral)
+
+
+        }
+
+        totalAlumnos = e.length;
+
+        function Listar() {
+
+            const _tbody = document.querySelector("tbody")
+
+            for (i = 0; i < nombre.length; i++) {
+
+                _tbody.innerHTML += `   <tr>
+                    
+                            <td> ${matricula[i]} </td>
+                            <td> ${nombre[i]}</td>
+                            <td> ${apellido[i]}</td>
+                            <td> ${materia[i]}</td>
+                            <td> ${cicloLectivo[i]}   </td>
+                            <td> ${notaParcial1[i]} </td>
+                            <td> ${notaParcial2[i]}</td>
+                            <td> ${promedioGeneral[i]}</td>
+                        </tr>    `
+            }
+
+
+
+        }/*
+
+        function VerEstadistica() {
+
+            cont = 0
+
+            acumNota1 = 0
+            acumNota2 = 0
+
+            promEdad = 0
+            PromSueldo = 0
+
+            for (i = 0; i < nombre.length; i++) {
+
+
+                cont++
+
+                acumNota1 += notaParcial1[i]
+                acumNota2 += notaParcial2[i]
+
+                acum += sueldo[i]
+
+
+            }
+
+
+            promEdad = acumEdad / cont
+
+            PromSueldo = acumSueldo / cont
+
+
+            const _pEstadistica = document.getElementById("estadisticas")
+
+            _pEstadistica.innerHTML = `Edades: Promedio: ${promEdad}  Acumulador: ${acumEdad} Contador: ${cont}
+                                        <br><br>
+                                        Sueldo: Promedio: ${PromSueldo}  Acumulador: ${acumSueldo} Contador: ${cont}
+            `
+
+
+
+        }*/
+
+
+        //for(i = 0; i <= matricula.length; i++){
+          //  alert(promGen[i])
+        //}
+
+        if (e ==("matematicas")){
+
+            cantidadAlumnosMatematica = 0
+
+            for(i=0; i<materia.length; i++) {
+                cantidadAlumnosMatematica ++
+            }
+
+            alert("estudian la carrera de matematica " + cantidadAlumnosMatematica + " alumnos")
+
+            if(e!="matematicas"){
+
+                cantidadAlumnosNoMatematica=0
+
+                
+
+
+                cantidadAlumnosNoMatematica=
+
+                cantidadAlumnosNoMatematica++
+
+
+                alert(cantidadAlumnosNoMatematica)
+
+
+
+            }
+
+
+
+        }  
+
+
+        
+    </script>
+
+
+
+</body>
+
+
+
+</html>
