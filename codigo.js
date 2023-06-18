@@ -7,7 +7,7 @@ let notaParcial1 = [];
 let notaParcial2 = [];
 let promedioGeneral = [];
 
-let m; 
+let m;
 let n;
 let a;
 let e;
@@ -17,51 +17,50 @@ let np2;
 let promGen;
 
 
+Cargar()
+Listar()
 
-Cargar();
-Listar();
+function Cargar() {
 
-        function Cargar() {
+    for (let i = 0; i < 3; i++) {
 
-            for (let i = 0; i < 3; i++) {
-
-            m = prompt("matricula");
-            n = prompt("Nombre:");
-            a = prompt("Apellido:");
-            e = prompt("materia");
-            c = prompt("ciclo lectivo");
-            np1 = parseFloat(prompt("nota parcial 1"));
-            np2 = parseFloat(prompt("nota parcial 2"));
-            promGen =(np1 + np2)/2;
-
+        m = prompt("matricula");
+        n = prompt("Nombre:");
+        a = prompt("Apellido:");
+        e = prompt("materia");
+        c = prompt("ciclo lectivo");
+        np1 = parseFloat(prompt("nota parcial 1"));
+        np2 = parseFloat(prompt("nota parcial 2"));
+        promGen = (np1 + np2) / 2;
 
 
-                matricula[i] = m
-                nombre[i] = n
-                apellido[i] = a
-                materia[i] = e
-                cicloLectivo[i] = parseInt(c)
-                notaParcial1[i] = parseInt(np1)
-                notaParcial2[i] = parseInt(np2)
-                promedioGeneral[i] = parseFloat(promGen) 
+
+        matricula[i] = m
+        nombre[i] = n
+        apellido[i] = a
+        materia[i] = e
+        cicloLectivo[i] = parseInt(c)
+        notaParcial1[i] = parseInt(np1)
+        notaParcial2[i] = parseInt(np2)
+        promedioGeneral[i] = parseFloat(promGen)
 
 
-            }
+    }
 
-            console.log(nombre, apellido,matricula,materia,cicloLectivo,notaParcial1,notaParcial2,promedioGeneral)
+    console.log(nombre, apellido, matricula, materia, cicloLectivo, notaParcial1, notaParcial2, promedioGeneral)
 
 
-        }
+}
 
-        totalAlumnos = e.length;
+totalAlumnos = e.length;
 
-        function Listar() {
+function Listar() {
 
-            const _tbody = document.querySelector("tbody")
+    const _tbody = document.querySelector("tbody")
 
-            for (let i = 0; i < nombre.length; i++) {
+    for (let i = 0; i < nombre.length; i++) {
 
-                _tbody.innerHTML += `   <tr>
+        _tbody.innerHTML += `   <tr>
                     
                             <td> ${matricula[i]} </td>
                             <td> ${nombre[i]}</td>
@@ -72,11 +71,11 @@ Listar();
                             <td> ${notaParcial2[i]}</td>
                             <td> ${promedioGeneral[i]}</td>
                         </tr>    `
-            }
+    }
 
 
 
-        }/*
+}/*
 
         function VerEstadistica() {
 
@@ -88,7 +87,7 @@ Listar();
             promEdad = 0
             PromSueldo = 0
 
-            for (let i = 0; i < nombre.length; i++) {
+            for (i = 0; i < nombre.length; i++) {
 
 
                 cont++
@@ -119,38 +118,40 @@ Listar();
         }*/
 
 
-        //for(let i = 0; i <= matricula.length; i++){
-          //  alert(promGen[i])
-        //}
-
-        if (e ==("matematicas")){
-
-            cantidadAlumnosMatematica = 0
-
-            for(let i=0; i<materia.length; i++) {
-                cantidadAlumnosMatematica ++
-            }
-
-            alert("estudian la carrera de matematica " + cantidadAlumnosMatematica + " alumnos")
-
-            if(e!="matematicas"){
-
-                cantidadAlumnosNoMatematica=0
-
-                
-
-
-                cantidadAlumnosNoMatematica=
-
-                cantidadAlumnosNoMatematica++
-
-
-                alert(cantidadAlumnosNoMatematica)
+//for(i = 0; i <= matricula.length; i++){
+//  alert(promGen[i])
+//}
 
 
 
-            }
+
+cantidadAlumnosMatematica = 0
+
+for (let i = 0; i < materia.length; i++) {
+    if (e == ("matematicas")) { cantidadAlumnosMatematica++ }
+
+}
+
+
+alert("estudian la carrera de matematica " + cantidadAlumnosMatematica + " alumnos")
+
+if (e != "matematicas") {
+
+    cantidadAlumnosNoMatematica = 0
 
 
 
-        }  
+
+    cantidadAlumnosNoMatematica =
+
+        cantidadAlumnosNoMatematica++
+
+
+    alert(cantidadAlumnosNoMatematica)
+
+
+
+}
+
+
+
