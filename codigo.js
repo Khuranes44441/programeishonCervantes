@@ -1,27 +1,38 @@
-matricula = []
-        nombre = []
-        apellido = []
-        materia = []
-        cicloLectivo = []
-        notaParcial1 = []
-        notaParcial2 = []
-        promedioGeneral = []
+let matricula = [];
+let nombre = [];
+let apellido = [];
+let materia = [];
+let cicloLectivo = [];
+let notaParcial1 = [];
+let notaParcial2 = [];
+let promedioGeneral = [];
 
-        Cargar()
-        Listar()
+let m; 
+let n;
+let a;
+let e;
+let c;
+let np1;
+let np2;
+let promGen;
+
+
+
+Cargar();
+Listar();
 
         function Cargar() {
 
-            for (i = 0; i < 3; i++) {
+            for (let i = 0; i < 3; i++) {
 
-                m = prompt("matricula");
-                n = prompt("Nombre:");
-                a = prompt("Apellido:");
-                e = prompt("materia");
-                c = prompt("ciclo lectivo");
-                np1 = parseFloat(prompt("nota parcial 1"));
-                np2 = parseFloat(prompt("nota parcial 2"));
-                promGen =(np1 + np2)/2;
+            m = prompt("matricula");
+            n = prompt("Nombre:");
+            a = prompt("Apellido:");
+            e = prompt("materia");
+            c = prompt("ciclo lectivo");
+            np1 = parseFloat(prompt("nota parcial 1"));
+            np2 = parseFloat(prompt("nota parcial 2"));
+            promGen =(np1 + np2)/2;
 
 
 
@@ -48,7 +59,7 @@ matricula = []
 
             const _tbody = document.querySelector("tbody")
 
-            for (i = 0; i < nombre.length; i++) {
+            for (let i = 0; i < nombre.length; i++) {
 
                 _tbody.innerHTML += `   <tr>
                     
@@ -77,7 +88,7 @@ matricula = []
             promEdad = 0
             PromSueldo = 0
 
-            for (i = 0; i < nombre.length; i++) {
+            for (let i = 0; i < nombre.length; i++) {
 
 
                 cont++
@@ -108,7 +119,7 @@ matricula = []
         }*/
 
 
-        //for(i = 0; i <= matricula.length; i++){
+        //for(let i = 0; i <= matricula.length; i++){
           //  alert(promGen[i])
         //}
 
@@ -116,7 +127,7 @@ matricula = []
 
             cantidadAlumnosMatematica = 0
 
-            for(i=0; i<materia.length; i++) {
+            for(let i=0; i<materia.length; i++) {
                 cantidadAlumnosMatematica ++
             }
 
