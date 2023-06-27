@@ -7,151 +7,102 @@ let notaParcial1 = [];
 let notaParcial2 = [];
 let promedioGeneral = [];
 
-let m;
-let n;
-let a;
-let e;
-let c;
-let np1;
-let np2;
-let promGen;
-
-
-Cargar()
-Listar()
+Cargar();
+Listar();
+CalcularEstadisticas();
 
 function Cargar() {
+  for (let i = 0; i < 3; i++) {
+    let m = prompt("Matricula:");
+    let n = prompt("Nombre:");
+    let a = prompt("Apellido:");
+    let e = prompt("Materia:");
+    let c = prompt("Ciclo lectivo:");
+    let np1 = parseFloat(prompt("Nota parcial 1:"));
+    let np2 = parseFloat(prompt("Nota parcial 2:"));
+    let promGen = (np1 + np2) / 2;
 
-    for (let i = 0; i < 3; i++) {
+    matricula.push(m);
+    nombre.push(n);
+    apellido.push(a);
+    materia.push(e);
+    cicloLectivo.push(parseInt(c));
+    notaParcial1.push(np1);
+    notaParcial2.push(np2);
+    promedioGeneral.push(promGen);
+  }
 
-        m = prompt("matricula");
-        n = prompt("Nombre:");
-        a = prompt("Apellido:");
-        e = prompt("materia");
-        c = prompt("ciclo lectivo");
-        np1 = parseFloat(prompt("nota parcial 1"));
-        np2 = parseFloat(prompt("nota parcial 2"));
-        promGen = (np1 + np2) / 2;
-
-
-
-        matricula[i] = m
-        nombre[i] = n
-        apellido[i] = a
-        materia[i] = e
-        cicloLectivo[i] = parseInt(c)
-        notaParcial1[i] = parseInt(np1)
-        notaParcial2[i] = parseInt(np2)
-        promedioGeneral[i] = parseFloat(promGen)
-
-
-    }
-
-    console.log(nombre, apellido, matricula, materia, cicloLectivo, notaParcial1, notaParcial2, promedioGeneral)
-
-
+  console.log(nombre, apellido, matricula, materia, cicloLectivo, notaParcial1, notaParcial2, promedioGeneral);
 }
-
-totalAlumnos = e.length;
 
 function Listar() {
+  const tbody = document.querySelector("tbody");
 
-    const _tbody = document.querySelector("tbody")
+  for (let i = 0; i < nombre.length; i++) {
+    tbody.innerHTML += `
+      <tr>
+        <td>${matricula[i]}</td>
+        <td>${nombre[i]}</td>
+        <td>${apellido[i]}</td>
+        <td>${materia[i]}</td>
+        <td>${cicloLectivo[i]}</td>
+        <td>${notaParcial1[i]}</td>
+        <td>${notaParcial2[i]}</td>
+        <td>${promedioGeneral[i]}</td>
+      </tr>
+    `;
+  }
+}
 
-    for (let i = 0; i < nombre.length; i++) {
+function CalcularEstadisticas() {
+  let cont = nombre.length;
+  let acumNota1 = 0;
+  let acumNota2 = 0;
+  let promedioNota1 = 0;
+  let promedioNota2 = 0;
+  let materiasDesaprobadas = {};
+  let materiasAprobadas = [];
+  let materiasPromocionadas = [];
 
-        _tbody.innerHTML += `   <tr>
-                    
-                            <td> ${matricula[i]} </td>
-                            <td> ${nombre[i]}</td>
-                            <td> ${apellido[i]}</td>
-                            <td> ${materia[i]}</td>
-                            <td> ${cicloLectivo[i]}   </td>
-                            <td> ${notaParcial1[i]} </td>
-                            <td> ${notaParcial2[i]}</td>
-                            <td> ${promedioGeneral[i]}</td>
-                        </tr>    `
+  for (let i = 0; i < nombre.length; i++) {
+    acumNota1 += notaParcial1[i];
+    acumNota2 += notaParcial2[i];
+
+    if (notaParcial1[i] < 6 || notaParcial2[i] < 6) {
+      if (materiasDesaprobadas[materia[i]]) {
+        materiasDesaprobadas[materia[i]]++;
+      } else {
+        materiasDesaprobadas[materia[i]] = 1;
+      }
+    } else if (notaParcial1[i] >= 8 && notaParcial2[i] >= 8) {
+      if (!materiasPromocionadas.includes(materia[i])) {
+        materiasPromocionadas.push(materia[i]);
+      }
+    } else {
+      if (!materiasAprobadas.includes(materia[i])) {
+        materiasAprobadas.push(materia[i]);
+      }
     }
+  }
 
+  promedioNota1 = acumNota1 / cont;
+  promedioNota2 = acumNota2 / cont;
 
+  const estadisticasElement = document.getElementById("estadisticas");
+  estadisticasElement.innerHTML = `Promedio Nota 1: ${promedioNota1.toFixed(
+    2
+  )}<br>Promedio Nota 2: ${promedioNota2.toFixed(2)}<br><br>`;
 
-}/*
+  estadisticasElement.innerHTML += "Materias desaprobadas:<br>";
+  for (let materiaDesaprobada in materiasDesaprobadas) {
+    estadisticasElement.innerHTML += `${materiasDesaprobadas[materiaDesaprobada]} alumno(s) desaprobó ${materiaDesaprobada}<br>`;
+  }
 
-        function VerEstadistica() {
-
-            cont = 0
-
-            acumNota1 = 0
-            acumNota2 = 0
-
-            promEdad = 0
-            PromSueldo = 0
-
-            for (i = 0; i < nombre.length; i++) {
-
-
-                cont++
-
-                acumNota1 += notaParcial1[i]
-                acumNota2 += notaParcial2[i]
-
-                acum += sueldo[i]
-
-
-            }
-
-
-            promEdad = acumEdad / cont
-
-            PromSueldo = acumSueldo / cont
-
-
-            const _pEstadistica = document.getElementById("estadisticas")
-
-            _pEstadistica.innerHTML = `Edades: Promedio: ${promEdad}  Acumulador: ${acumEdad} Contador: ${cont}
-                                        <br><br>
-                                        Sueldo: Promedio: ${PromSueldo}  Acumulador: ${acumSueldo} Contador: ${cont}
-            `
-
-
-
-        }*/
-
-
-//for(i = 0; i <= matricula.length; i++){
-//  alert(promGen[i])
-//}
-
-
-
-
-cantidadAlumnosMatematica = 0
-
-for (let i = 0; i < materia.length; i++) {
-    if (e == ("matematicas")) { cantidadAlumnosMatematica++ }
-
+  estadisticasElement.innerHTML += `<br>Materias aprobadas: ${materiasAprobadas.join(", ")}<br>`;
+  estadisticasElement.innerHTML += `Materias promocionadas: ${materiasPromocionadas.join(", ")}`;
 }
 
 
-alert("estudian la carrera de matematica " + cantidadAlumnosMatematica + " alumnos")
-
-if (e != "matematicas") {
-
-    cantidadAlumnosNoMatematica = 0
-
-
-
-
-    cantidadAlumnosNoMatematica =
-
-        cantidadAlumnosNoMatematica++
-
-
-    alert(cantidadAlumnosNoMatematica)
-
-
-
-}
 
 
 
