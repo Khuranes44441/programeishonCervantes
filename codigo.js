@@ -32,7 +32,7 @@ function Cargar() {
     promedioGeneral.push(promGen);
   }
 
-  console.log(nombre, apellido, matricula, materia, cicloLectivo, notaParcial1, notaParcial2, promedioGeneral);
+  console.log(nombre, apellido, matricula, materia, cicloLectivo, notaParcial1, notaParcial2, promedioGeneral);    // ... Tu función Cargar existente ...
 }
 
 function Listar() {
@@ -51,55 +51,62 @@ function Listar() {
         <td>${promedioGeneral[i]}</td>
       </tr>
     `;
-  }
+  }// ... Tu función Listar existente ...
 }
 
 function CalcularEstadisticas() {
   let cont = nombre.length;
-  let acumNota1 = 0;
-  let acumNota2 = 0;
-  let promedioNota1 = 0;
-  let promedioNota2 = 0;
   let materiasDesaprobadas = {};
   let materiasAprobadas = [];
   let materiasPromocionadas = [];
 
   for (let i = 0; i < nombre.length; i++) {
-    acumNota1 += notaParcial1[i];
-    acumNota2 += notaParcial2[i];
-
-    if (notaParcial1[i] < 6 || notaParcial2[i] < 6) {
+    if (notaParcial1[i] >= 4 && notaParcial2[i] >= 4) {
+      if (promedioGeneral[i] >= 7) {
+        if (!materiasPromocionadas.includes(materia[i])) {
+          materiasPromocionadas.push(materia[i]);
+        }
+      } else {
+        if (!materiasAprobadas.includes(materia[i])) {
+          materiasAprobadas.push(materia[i]);
+        }
+      }
+    } else {
       if (materiasDesaprobadas[materia[i]]) {
         materiasDesaprobadas[materia[i]]++;
       } else {
         materiasDesaprobadas[materia[i]] = 1;
       }
-    } else if (notaParcial1[i] >= 8 && notaParcial2[i] >= 8) {
-      if (!materiasPromocionadas.includes(materia[i])) {
-        materiasPromocionadas.push(materia[i]);
-      }
-    } else {
-      if (!materiasAprobadas.includes(materia[i])) {
-        materiasAprobadas.push(materia[i]);
-      }
     }
   }
 
-  promedioNota1 = acumNota1 / cont;
-  promedioNota2 = acumNota2 / cont;
-
   const estadisticasElement = document.getElementById("estadisticas");
-  estadisticasElement.innerHTML = `Promedio Nota 1: ${promedioNota1.toFixed(
-    2
-  )}<br>Promedio Nota 2: ${promedioNota2.toFixed(2)}<br><br>`;
-
-  estadisticasElement.innerHTML += "Materias desaprobadas:<br>";
+  estadisticasElement.innerHTML = "MATERIAS DESAPROBADAS:<br>";
   for (let materiaDesaprobada in materiasDesaprobadas) {
     estadisticasElement.innerHTML += `${materiasDesaprobadas[materiaDesaprobada]} alumno(s) desaprobó ${materiaDesaprobada}<br>`;
   }
 
-  estadisticasElement.innerHTML += `<br>Materias aprobadas: ${materiasAprobadas.join(", ")}<br>`;
-  estadisticasElement.innerHTML += `Materias promocionadas: ${materiasPromocionadas.join(", ")}`;
+  estadisticasElement.innerHTML += `<br>MATERIAS APROBADAS: ${materiasAprobadas.join(", ")}<br>`;
+  estadisticasElement.innerHTML += `MATERIAS PROMOCIONADAS: ${materiasPromocionadas.join(", ")}<br>`;// ... Tu función CalcularEstadisticas existente ...
+
+    // Obtener los ciclos únicos del arreglo cicloLectivo
+    const ciclosUnicos = [...new Set(cicloLectivo)];
+
+    // Calcular y mostrar la cantidad de alumnos por ciclo
+    for (const ciclo of ciclosUnicos) {
+        CalcularCantidadAlumnosPorCiclo(ciclo);
+    }
+}
+
+function CalcularCantidadAlumnosPorCiclo(ciclo) {
+    let cantidadAlumnos = 0;
+    for (let i = 0; i < cicloLectivo.length; i++) {
+        if (cicloLectivo[i] === ciclo) {
+            cantidadAlumnos++;
+        }
+    }
+    const estadisticasElement = document.getElementById("estadisticas");
+    estadisticasElement.innerHTML += `<br>Cantidad de alumnos en el ciclo lectivo ${ciclo}: ${cantidadAlumnos}`;
 }
 
 
